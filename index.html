@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatización de Procesos Industriales y de Servicios</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a0033 50%, #cc0000 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+        /* Patrón de telaraña de fondo */
+        .web-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 0;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, #cc0000 35px, #cc0000 37px),
+                repeating-linear-gradient(-45deg, transparent, transparent 35px, #cc0000 35px, #cc0000 37px);
+        }
+
+        /* Portada */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 5px solid #cc0000;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '🕷️';
+            position: absolute;
+            top: -50px;
+            right: 10%;
+            font-size: 12rem;
+            opacity: 0.15;
+            z-index: 0;
+            animation: spidermanFall 3s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        @keyframes spidermanFall {
+            0% { 
+                transform: translateY(-100px) rotate(0deg) scale(1); 
+                opacity: 0;
+            }
+            50% { 
+                transform: translateY(200px) rotate(180deg) scale(1.2); 
+                opacity: 0.15;
+            }
+            100% { 
+                transform: translateY(500px) rotate(360deg) scale(0.8); 
+                opacity: 0;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: #cc0000;
+            text-shadow: 0 0 20px #cc0000, 0 0 40px #ff0000, 0 5px 10px rgba(0,0,0,0.5);
+            margin-bottom: 20px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: #00d4ff;
+            text-shadow: 0 0 15px #00d4ff;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .hero .semester {
+            font-size: 1.2rem;
+            color: #ffeb3b;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .info-box {
+            background: linear-gradient(145deg, rgba(204, 0, 0, 0.2), rgba(0, 212, 255, 0.1));
+            backdrop-filter: blur(10px);
+            border: 3px solid #cc0000;
+            border-radius: 20px;
+            padding: 30px 50px;
+            margin: 20px 0;
+            box-shadow: 0 0 30px rgba(204, 0, 0, 0.5);
+        }
+
+        .info-box h3 {
+            color: #00d4ff;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #00d4ff;
+        }
+
+        .author-name, .teacher-name {
+            font-family: 'Permanent Marker', cursive;
+            font-size: 1.3rem;
+            color: #fff;
+            margin: 12px 0;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 
+                3px 3px 0px #cc0000,
+                -1px -1px 0px #00d4ff,
+                2px 2px 5px rgba(0, 0, 0, 0.8);
+            transform: rotate(-2deg);
+            transition: all 0.3s ease;
+        }
+
+        .author-name:hover, .teacher-name:hover {
+            transform: rotate(2deg) scale(1.05);
+            text-shadow: 
+                4px 4px 0px #cc0000,
+                -2px -2px 0px #00d4ff,
+                3px 3px 10px rgba(255, 235, 59, 0.6);
+        }
+
+        .teacher-name {
+            color: #ffeb3b;
+            font-size: 1.4rem;
+            font-weight: 800;
+            text-shadow: 
+                3px 3px 0px #cc0000,
+                -1px -1px 0px #00d4ff,
+                2px 2px 8px rgba(255, 235, 59, 0.8);
+            transform: rotate(1deg);
+        }
+
+        .spiderman-quote {
+            margin-top: 30px;
+            font-style: italic;
+            color: #00d4ff;
+            font-size: 1.5rem;
+            text-shadow: 0 0 15px #00d4ff, 0 0 30px #00d4ff;
+            font-weight: bold;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { 
+                text-shadow: 0 0 15px #00d4ff, 0 0 30px #00d4ff;
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 25px #00d4ff, 0 0 50px #00d4ff, 0 0 70px #cc0000;
+                transform: scale(1.05);
+            }
+        }
+
+        /* Catálogo */
+        .catalog {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .catalog-title {
+            text-align: center;
+            font-size: 3rem;
+            color: #cc0000;
+            text-shadow: 0 0 20px #cc0000;
+            margin-bottom: 60px;
+            font-weight: bold;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        /* Cards activas */
+        .card {
+            background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 3px solid #cc0000;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(204, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #cc0000, #00d4ff, #cc0000);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(204, 0, 0, 0.7), 0 0 40px rgba(0, 212, 255, 0.5);
+            border-color: #00d4ff;
+        }
+
+        .card:hover::before {
+            opacity: 0.1;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #cc0000 0%, #000000 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::after {
+            content: '⚡';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.1;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.2); opacity: 0.2; }
+        }
+
+        .card-icon {
+            font-size: 5rem;
+            z-index: 2;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .card-content {
+            padding: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: #00d4ff;
+            text-shadow: 0 0 10px #00d4ff;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .card-description {
+            color: #fff;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* Estilos mejorados para los botones "Ver Proyecto" */
+        .card-content a {
+            display: inline-block;
+            padding: 16px 40px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #cc0000, #ff0000);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(204, 0, 0, 0.4);
+            z-index: 2;
+            position: relative;
+            border: 2px solid #fff;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card-content a:hover {
+            background: linear-gradient(135deg, #ff0000, #cc0000);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(204, 0, 0, 0.8), 0 0 30px rgba(255, 0, 0, 0.5);
+            border-color: #00d4ff;
+        }
+
+        .card-content a:focus {
+            outline: 3px solid #00d4ff;
+            outline-offset: 4px;
+        }
+
+        .card-content a:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #cc0000;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 0 15px rgba(204, 0, 0, 0.7);
+            z-index: 3;
+        }
+
+        /* Cards pendientes */
+        .pending-section {
+            margin-top: 80px;
+        }
+
+        .pending-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #ffeb3b;
+            text-shadow: 0 0 15px #ffeb3b;
+            margin-bottom: 40px;
+            font-weight: bold;
+        }
+
+        .card-pending {
+            background: linear-gradient(145deg, #2d2d2d, #1a1a1a);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 3px dashed #666;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+            position: relative;
+            opacity: 0.7;
+        }
+
+        .card-pending:hover {
+            opacity: 1;
+            transform: translateY(-10px);
+            border-color: #ffeb3b;
+            box-shadow: 0 15px 40px rgba(255, 235, 59, 0.3);
+        }
+
+        .card-pending .card-image {
+            background: linear-gradient(135deg, #333 0%, #111 100%);
+            position: relative;
+        }
+
+        .pending-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            z-index: 3;
+        }
+
+        .pending-overlay a {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #666, #888);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            border: 2px solid #999;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pending-overlay a:hover {
+            background: linear-gradient(135deg, #888, #aaa);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 235, 59, 0.4);
+            border-color: #ffeb3b;
+        }
+
+        .pending-overlay a:focus {
+            outline: 3px solid #ffeb3b;
+            outline-offset: 3px;
+        }
+
+        .pending-text {
+            background: #ffeb3b;
+            color: #000;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transform: rotate(-15deg);
+            box-shadow: 0 5px 20px rgba(255, 235, 59, 0.5);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 3px solid #cc0000;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .footer-quote {
+            color: #00d4ff;
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #00d4ff;
+        }
+
+        .footer-text {
+            color: #fff;
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+
+        .footer-spider {
+            font-size: 3rem;
+            margin: 20px 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .info-box {
+                padding: 20px 30px;
+            }
+
+            .catalog-title, .pending-title {
+                font-size: 2rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero::before {
+                font-size: 8rem;
+            }
+
+            .card-icon {
+                font-size: 3.5rem;
+            }
+
+            .card-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="web-pattern"></div>
+
+    <!-- Portada -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>⚡ AUTOMATIZACIÓN DE PROCESOS ⚡</h1>
+            <div class="subtitle">INDUSTRIALES Y DE SERVICIOS</div>
+            <div class="info-box">
+                <h3>🕷️ Trabajo realizado por:</h3>
+                <p class="author-name">ANGEL JESHUA GUTIERREZ ROBLERO</p>
+            </div>
+
+            <div class="info-box">
+                <h3>👨‍🏫 Docente:</h3>
+                <p class="teacher-name">JORDY CHIRINO BALCAZAR</p>
+            </div>
+
+            <div class="spiderman-quote">
+                "Solo es un salto de fe" 🕸️
+            </div>
+        </div>
+    </section>
+
+    <!-- Catálogo -->
+    <section class="catalog">
+        <h2 class="catalog-title">📚 CATÁLOGO DE CONTENIDOS</h2>
+
+        <!-- Introducción a Fundamentos -->
+        <div class="intro-section">
+            <h2 class="pending-title">🎯 INTRODUCCIÓN A LOS FUNDAMENTOS</h2>
+
+            <div class="info-box" style="text-align:left; max-width: 900px; margin: 20px auto; padding: 20px 30px;">
+                <h3 style="font-size:1.05rem;">⚡ Automatización de procesos industriales y de servicios</h3>
+                <p style="line-height:1.6; margin-top:12px; font-size:0.85rem;">
+                    La automatización es el uso de sistemas de control (electrónicos, mecánicos o computacionales) para que un proceso funcione con mínima o nula intervención humana. En la industria se aplica en líneas de producción, control de calidad y manejo de materiales; en los servicios se ve en sistemas de climatización, seguridad, riego o iluminación inteligente. El objetivo siempre es el mismo: hacer un proceso más preciso, seguro y eficiente, reduciendo errores y tiempos muertos.
+                </p>
+            </div>
+
+            <div class="info-box" style="text-align:left; max-width: 900px; margin: 20px auto; padding: 20px 30px;">
+                <h3 style="font-size:1.05rem;">🔑 Conceptos clave</h3>
+                <p style="line-height:1.6; margin-top:12px; font-size:0.85rem;">
+                    <strong style="color:#00d4ff;">Sensor:</strong> dispositivo que detecta una variable física (temperatura, distancia, luz, humedad) y la convierte en una señal eléctrica.<br><br>
+                    <strong style="color:#00d4ff;">Actuador:</strong> elemento que ejecuta una acción física a partir de una señal de control (motor, servomotor, relevador, LED).<br><br>
+                    <strong style="color:#00d4ff;">Controlador:</strong> el "cerebro" del sistema (en este caso Arduino) que lee sensores, toma decisiones según una lógica programada y activa actuadores.<br><br>
+                    <strong style="color:#00d4ff;">Lazo de control:</strong> el ciclo continuo de sensar → procesar → actuar que mantiene un proceso dentro de los parámetros deseados.<br><br>
+                    <strong style="color:#00d4ff;">Retroalimentación (feedback):</strong> cuando el sistema usa la salida de un proceso como información para ajustar su propio comportamiento.
+                </p>
+            </div>
+
+            <div class="info-box" style="text-align:left; max-width: 900px; margin: 20px auto; padding: 20px 30px;">
+                <h3 style="font-size:1.05rem;">🔩 Arduino como plataforma de automatización</h3>
+                <p style="line-height:1.6; margin-top:12px; font-size:0.85rem;">
+                    Arduino es una placa de desarrollo de bajo costo que funciona como controlador para prototipos de automatización. Permite leer sensores (temperatura, distancia, humedad, luz), procesar esa información con código y activar actuadores (motores, LEDs, relevadores) en tiempo real. Es el punto de entrada ideal para entender los mismos principios que luego se aplican en controladores industriales como los PLC.
+                </p>
+            </div>
+
+            <div class="info-box" style="text-align:left; max-width: 900px; margin: 20px auto; padding: 20px 30px;">
+                <h3 style="font-size:1.05rem;">🌐 Internet de las Cosas (IoT)</h3>
+                <p style="line-height:1.6; margin-top:12px; font-size:0.85rem;">
+                    El IoT conecta dispositivos físicos a internet para que puedan enviar datos, recibir órdenes o ser monitoreados de forma remota. Al combinar Arduino con módulos de conectividad (WiFi, Bluetooth), un proceso automatizado deja de estar limitado a la planta o al salón de clases: sus datos pueden verse en un celular o una computadora en cualquier lugar, y sus actuadores pueden controlarse a distancia. Este puente entre automatización local e IoT es la base de lo que hoy se conoce como Industria 4.0.
+                </p>
+            </div>
+
+            <div class="spiderman-quote" style="margin-bottom: 40px;">
+                "Con un gran control, viene una gran automatización" 🕸️
+            </div>
+        </div>
+
+        <!-- Sección Pendiente -->
+        <div class="pending-section">
+            <h2 class="pending-title">⏳ PRÓXIMAMENTE</h2>
+            
+            <div class="cards-grid">
+                <!-- Card Pendiente 1 -->
+                <div class="card-pending">
+                    <div class="card-image">
+                        <div class="card-icon">🕷️</div>
+                        <div class="pending-overlay">
+                            <span class="pending-text">PRÓXIMAMENTE</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">PRÓXIMAMENTE</h3>
+                        <a href="PROXIMAMENTE.html">Ver Proyecto →</a>
+                    </div>
+                </div>
+
+                <!-- Card Pendiente 2 -->
+                <div class="card-pending">
+                    <div class="card-image">
+                        <div class="card-icon">⚡</div>
+                        <div class="pending-overlay">
+                            <span class="pending-text">PRÓXIMAMENTE</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">PRÓXIMAMENTE</h3>
+                        <a href="PROXIMAMENTE.html">Ver Proyecto →</a>
+                    </div>
+                </div>
+
+                <!-- Card Pendiente 3 -->
+                <div class="card-pending">
+                    <div class="card-image">
+                        <div class="card-icon">🕸️</div>
+                        <div class="pending-overlay">
+                            <span class="pending-text">PRÓXIMAMENTE</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">PRÓXIMAMENTE</h3>
+                        <a href="PROXIMAMENTE.html">Ver Proyecto →</a>
+                    </div>
+                </div>
+
+                <!-- Card Pendiente 4 -->
+                <div class="card-pending">
+                    <div class="card-image">
+                        <div class="card-icon">🔥</div>
+                        <div class="pending-overlay">
+                            <span class="pending-text">PRÓXIMAMENTE</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">PRÓXIMAMENTE</h3>
+                        <a href="PROXIMAMENTE.html">Ver Proyecto →</a>
+                    </div>
+                </div>
+
+                <!-- Card Pendiente 5 -->
+                <div class="card-pending">
+                    <div class="card-image">
+                        <div class="card-icon">💫</div>
+                        <div class="pending-overlay">
+                            <span class="pending-text">PRÓXIMAMENTE</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">PRÓXIMAMENTE</h3>
+                        <a href="PROXIMAMENTE.html">Ver Proyecto →</a>
+                    </div>
+                </div>
+
+                <!-- Card Pendiente 6 -->
+                <div class="card-pending">
+                    <div class="card-image">
+                        <div class="card-icon">🎯</div>
+                        <div class="pending-overlay">
+                            <span class="pending-text">PRÓXIMAMENTE</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">PRÓXIMAMENTE</h3>
+                        <a href="PROXIMAMENTE.html">Ver Proyecto →</a>
+                    </div>
+                </div>
+
+                <!-- Card Pendiente 7 -->
+                <div class="card-pending">
+                    <div class="card-image">
+                        <div class="card-icon">🚀</div>
+                        <div class="pending-overlay">
+                            <span class="pending-text">PRÓXIMAMENTE</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">PRÓXIMAMENTE</h3>
+                        <a href="PROXIMAMENTE.html">Ver Proyecto →</a>
+                    </div>
+                </div>
+
+                <!-- Card Pendiente 8 -->
+                <div class="card-pending">
+                    <div class="card-image">
+                        <div class="card-icon">⭐</div>
+                        <div class="pending-overlay">
+                            <span class="pending-text">PRÓXIMAMENTE</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">PRÓXIMAMENTE</h3>
+                        <a href="GLOSARIO.html">Ver Proyecto →</a>
+                    </div>
+                </div>
+
+                <!-- Card Pendiente 9 -->
+                <div class="card-pending">
+                    <div class="card-image">
+                        <div class="card-icon">💥</div>
+                        <div class="pending-overlay">
+                            <span class="pending-text">PRÓXIMAMENTE</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">PRÓXIMAMENTE</h3>
+                        <a href="PROXIMAMENTE.html">Ver Proyecto →</a>
+                    </div>
+                </div>
+
+                <!-- Card Pendiente 10 -->
+                <div class="card-pending">
+                    <div class="card-image">
+                        <div class="card-icon">🌟</div>
+                        <div class="pending-overlay">
+                            <span class="pending-text">PRÓXIMAMENTE</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">PRÓXIMAMENTE</h3>
+                        <a href="PROXIMAMENTE.html">Ver Proyecto →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-spider">🕷️</div>
+        <p class="footer-quote">"Anyone can wear the mask... Anyone can learn Arduino!"</p>
+        <p class="footer-text">Miles Morales Edition - Electrónica y Programación</p>
+        <p class="footer-text">© 2024 Principios de la Electrónica con Arduino</p>
+        <p class="footer-text" style="margin-top: 20px; color: #cc0000;">⚡ El poder está en tus manos ⚡</p>
+    </footer>
+</body>
+</html>
