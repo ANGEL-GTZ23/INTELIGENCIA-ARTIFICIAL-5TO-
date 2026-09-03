@@ -120,6 +120,83 @@
             font-size: 0.9rem;
             margin: 8px 0;
         }
+
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-box li {
+            line-height: 1.6;
+            font-size: 0.95rem;
+            padding: 6px 0 6px 28px;
+            position: relative;
+        }
+
+        .pros li::before {
+            content: '✅';
+            position: absolute;
+            left: 0;
+        }
+
+        .cons li::before {
+            content: '⚠️';
+            position: absolute;
+            left: 0;
+        }
+
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .compare-table th, .compare-table td {
+            border: 1px solid rgba(0, 212, 255, 0.4);
+            padding: 10px 14px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .compare-table th {
+            background: rgba(204, 0, 0, 0.3);
+            color: #ffeb3b;
+        }
+
+        .cycle-steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .cycle-step {
+            background: rgba(0, 212, 255, 0.1);
+            border: 2px solid #00d4ff;
+            border-radius: 15px;
+            padding: 14px 18px;
+            flex: 1 1 140px;
+            text-align: center;
+        }
+
+        .cycle-step .step-num {
+            display: inline-block;
+            background: #cc0000;
+            color: #fff;
+            border-radius: 50%;
+            width: 26px;
+            height: 26px;
+            line-height: 26px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .cycle-step p {
+            font-size: 0.85rem;
+        }
     </style>
 </head>
 <body>
@@ -132,10 +209,99 @@
 
     <main class="content">
         <div class="info-box">
+            <h3>📜 Historia de la automatización</h3>
+            <p>
+                La idea de automatizar procesos es mucho más antigua que la electrónica. Ya en el siglo XVIII aparecieron los primeros telares mecánicos (como el telar de Jacquard, controlado con tarjetas perforadas) que anticipaban la lógica de "programar" una máquina. Con la Revolución Industrial (siglos XVIII-XIX) llegaron las máquinas de vapor y las líneas de producción mecánicas. A mediados del siglo XX se incorporó la electrónica y el control por relés, y en 1968 nació el primer PLC (Controlador Lógico Programable), que reemplazó el cableado rígido por lógica programable. Desde los años 80 los microcontroladores y computadoras abarataron y democratizaron la automatización, y hoy, con el Internet de las Cosas y la Industria 4.0, los procesos automatizados además se conectan, se monitorean y se controlan de forma remota.
+            </p>
+        </div>
+
+        <div class="info-box">
             <h3>⚡ Automatización de procesos industriales y de servicios</h3>
             <p>
                 La automatización es el uso de sistemas de control (electrónicos, mecánicos o computacionales) para que un proceso funcione con mínima o nula intervención humana. En la industria se aplica en líneas de producción, control de calidad y manejo de materiales; en los servicios se ve en sistemas de climatización, seguridad, riego o iluminación inteligente. El objetivo siempre es el mismo: hacer un proceso más preciso, seguro y eficiente, reduciendo errores y tiempos muertos.
             </p>
+        </div>
+
+        <div class="info-box">
+            <h3>🔄 El ciclo de la automatización</h3>
+            <p>
+                Todo sistema automatizado, sin importar qué tan simple o complejo sea, repite el mismo ciclo básico una y otra vez:
+            </p>
+            <div class="cycle-steps">
+                <div class="cycle-step">
+                    <span class="step-num">1</span>
+                    <p><strong style="color:#ffeb3b;">Sensar</strong><br>El sensor mide una variable física del proceso (temperatura, distancia, luz, etc.).</p>
+                </div>
+                <div class="cycle-step">
+                    <span class="step-num">2</span>
+                    <p><strong style="color:#ffeb3b;">Procesar</strong><br>El controlador (Arduino, PLC, microcontrolador) analiza la señal y decide qué hacer según su lógica programada.</p>
+                </div>
+                <div class="cycle-step">
+                    <span class="step-num">3</span>
+                    <p><strong style="color:#ffeb3b;">Actuar</strong><br>El actuador ejecuta una acción física en respuesta a esa decisión (mover un motor, encender un LED, abrir una válvula).</p>
+                </div>
+                <div class="cycle-step">
+                    <span class="step-num">4</span>
+                    <p><strong style="color:#ffeb3b;">Retroalimentar</strong><br>El sistema vuelve a sensar el resultado de su propia acción para ajustarse, cerrando el lazo de control.</p>
+                </div>
+            </div>
+            <p style="margin-top:15px;">
+                Este ciclo se repite de forma continua y es lo que permite que un proceso se mantenga estable dentro de los parámetros deseados sin que una persona lo esté vigilando todo el tiempo.
+            </p>
+        </div>
+
+        <div class="info-box">
+            <h3>⚖️ Ventajas y desventajas de la automatización</h3>
+            <ul class="pros">
+                <li>Mayor precisión y consistencia en el resultado del proceso.</li>
+                <li>Reduce errores humanos y tiempos muertos.</li>
+                <li>Permite trabajar de forma continua (24/7) sin fatiga.</li>
+                <li>Mejora la seguridad al alejar a las personas de tareas peligrosas.</li>
+                <li>Facilita el monitoreo y el control remoto (IoT).</li>
+            </ul>
+            <ul class="cons" style="margin-top:10px;">
+                <li>Costo inicial de equipos, sensores y programación.</li>
+                <li>Requiere mantenimiento técnico especializado.</li>
+                <li>Puede reducir la necesidad de cierta mano de obra manual.</li>
+                <li>Una falla en el sistema de control puede detener todo el proceso.</li>
+                <li>Menor flexibilidad ante cambios no previstos en la programación.</li>
+            </ul>
+        </div>
+
+        <div class="info-box">
+            <h3>🏭🆚🛎️ Diferencias entre automatización industrial y de servicios</h3>
+            <table class="compare-table">
+                <tr>
+                    <th>Aspecto</th>
+                    <th>Automatización industrial</th>
+                    <th>Automatización de servicios</th>
+                </tr>
+                <tr>
+                    <td>Objetivo principal</td>
+                    <td>Producir bienes: fabricar, ensamblar, empaquetar</td>
+                    <td>Brindar comodidad o atención: climatizar, vigilar, atender</td>
+                </tr>
+                <tr>
+                    <td>Ejemplos típicos</td>
+                    <td>Líneas de ensamble, robots industriales, control de calidad</td>
+                    <td>Domótica, cajeros automáticos, riego inteligente, chatbots</td>
+                </tr>
+                <tr>
+                    <td>Escala</td>
+                    <td>Generalmente a gran escala (fábricas, plantas)</td>
+                    <td>Suele ser a menor escala (hogares, oficinas, comercios)</td>
+                </tr>
+                <tr>
+                    <td>Tecnología común</td>
+                    <td>PLC, robots, sensores industriales robustos</td>
+                    <td>Microcontroladores (Arduino/ESP32), apps, sensores de bajo costo</td>
+                </tr>
+                <tr>
+                    <td>Usuario final</td>
+                    <td>Operarios y personal técnico de la planta</td>
+                    <td>Personas comunes, clientes o usuarios finales</td>
+                </tr>
+            </table>
         </div>
 
         <div class="info-box">
