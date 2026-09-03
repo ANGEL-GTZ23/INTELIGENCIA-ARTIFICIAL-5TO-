@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conceptos Clave</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #1a0033 50%, #cc0000 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+
+        .web-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 0;
+            background-image:
+                repeating-linear-gradient(45deg, transparent, transparent 35px, #cc0000 35px, #cc0000 37px),
+                repeating-linear-gradient(-45deg, transparent, transparent 35px, #cc0000 35px, #cc0000 37px);
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 60px 20px 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            color: #cc0000;
+            text-shadow: 0 0 20px #cc0000, 0 0 40px #ff0000, 0 5px 10px rgba(0,0,0,0.5);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 25px;
+            background: linear-gradient(135deg, #333, #555);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            border: 2px solid #00d4ff;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: linear-gradient(135deg, #00d4ff, #333);
+            transform: translateY(-2px);
+        }
+
+        .content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 20px 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-box {
+            background: linear-gradient(145deg, rgba(204, 0, 0, 0.2), rgba(0, 212, 255, 0.1));
+            backdrop-filter: blur(10px);
+            border: 3px solid #cc0000;
+            border-radius: 20px;
+            padding: 25px 35px;
+            margin: 25px 0;
+            box-shadow: 0 0 30px rgba(204, 0, 0, 0.5);
+            text-align: left;
+        }
+
+        .info-box h3 {
+            color: #00d4ff;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px #00d4ff;
+        }
+
+        .info-box p {
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .spiderman-quote {
+            text-align: center;
+            margin-top: 30px;
+            font-style: italic;
+            color: #00d4ff;
+            font-size: 1.3rem;
+            text-shadow: 0 0 15px #00d4ff, 0 0 30px #00d4ff;
+            font-weight: bold;
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 3px solid #cc0000;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: #fff;
+            font-size: 0.9rem;
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="web-pattern"></div>
+
+    <header class="page-header">
+        <h1>🔑 Conceptos Clave 🔑</h1>
+        <a class="back-link" href="index.html">← Volver al catálogo</a>
+    </header>
+
+    <main class="content">
+        <div class="info-box">
+            <h3>🔑 Vocabulario básico de la automatización</h3>
+            <p>
+                <strong style="color:#00d4ff;">Sensor:</strong> dispositivo que detecta una variable física (temperatura, distancia, luz, humedad) y la convierte en una señal eléctrica.<br><br>
+                <strong style="color:#00d4ff;">Actuador:</strong> elemento que ejecuta una acción física a partir de una señal de control (motor, servomotor, relevador, LED).<br><br>
+                <strong style="color:#00d4ff;">Controlador:</strong> el "cerebro" del sistema (en este caso Arduino) que lee sensores, toma decisiones según una lógica programada y activa actuadores.<br><br>
+                <strong style="color:#00d4ff;">Lazo de control:</strong> el ciclo continuo de sensar → procesar → actuar que mantiene un proceso dentro de los parámetros deseados.<br><br>
+                <strong style="color:#00d4ff;">Retroalimentación (feedback):</strong> cuando el sistema usa la salida de un proceso como información para ajustar su propio comportamiento.
+            </p>
+        </div>
+
+        <div class="spiderman-quote">
+            "Con un gran poder, viene un gran vocabulario técnico" 🕸️
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p class="footer-text">Miles Morales Edition - Electrónica y Programación</p>
+        <p class="footer-text">© 2024 Principios de la Electrónica con Arduino</p>
+    </footer>
+</body>
+</html>
